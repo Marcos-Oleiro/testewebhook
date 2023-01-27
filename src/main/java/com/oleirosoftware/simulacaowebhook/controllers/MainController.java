@@ -2,6 +2,8 @@ package com.oleirosoftware.simulacaowebhook.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oleirosoftware.simulacaowebhook.controllers.model.ReturnObj;
@@ -11,28 +13,29 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 public class MainController {
-    
 
     @GetMapping("/consulta")
-    public ResponseEntity<?> consulta(){
-        
-        double random = Math.round(Math.random()*100);
+    public ResponseEntity<?> consulta() {
+
+        double random = Math.round(Math.random() * 100);
 
         ReturnObj returnObj = new ReturnObj();
-        returnObj.setProd(Boolean.valueOf(random%2==0));
+        returnObj.setProd(Boolean.valueOf(random % 2 == 0));
         log.info("Retorno: {}", returnObj);
         return ResponseEntity.ok(returnObj);
     }
-    
-    @GetMapping("/dev")
-    public ResponseEntity<?> dev(){
+
+    @PostMapping("/dev")
+    public ResponseEntity<?> dev(@RequestBody Object obj) {
         log.info("Ambiente DEV chamado");
+        log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
     }
-    
-    @GetMapping("/prd")
-    public ResponseEntity<?> prd(){
+
+    @PostMapping("/prd")
+    public ResponseEntity<?> prd(@RequestBody Object obj) {
         log.info("Ambiente PRD chamado");
+        log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
     }
 }
