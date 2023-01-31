@@ -38,4 +38,12 @@ public class MainController {
         log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
     }
+    
+    @GetMapping("/clean")
+    public ResponseEntity<?> cleanLogs(){
+        
+        log.info("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        
+        return ResponseEntity.ok(null);
+    }
 }
