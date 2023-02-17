@@ -1,9 +1,12 @@
 package com.oleirosoftware.simulacaowebhook.controllers;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oleirosoftware.simulacaowebhook.controllers.model.ReturnObj;
@@ -15,7 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 public class MainController {
 
     @GetMapping("/consulta")
-    public ResponseEntity<?> consulta() {
+    public ResponseEntity<?> consulta(@RequestHeader Map<String, String> headers) {
+
+        headers.forEach((key, value) -> {
+            log.info(String.format("Header '%s' = %s", key, value));
+        });
 
         double random = Math.round(Math.random() * 100);
 
@@ -26,15 +33,26 @@ public class MainController {
     }
 
     @PostMapping("/dev")
-    public ResponseEntity<?> dev(@RequestBody Object obj) {
+    public ResponseEntity<?> dev(@RequestBody Object obj, @RequestHeader Map<String, String> headers) {
         log.info("Ambiente DEV chamado");
+
+        headers.forEach((key, value) -> {
+            log.info(String.format("Header '%s' = %s", key, value));
+        });
+
         log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
     }
 
     @PostMapping("/prd")
-    public ResponseEntity<?> prd(@RequestBody Object obj) {
+    public ResponseEntity<?> prd(@RequestBody Object obj, @RequestHeader Map<String, String> headers) {
+
         log.info("Ambiente PRD chamado");
+
+        headers.forEach((key, value) -> {
+            log.info(String.format("Header '%s' = %s", key, value));
+        });
+
         log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
     }
@@ -42,7 +60,15 @@ public class MainController {
     @GetMapping("/clean")
     public ResponseEntity<?> cleanLogs(){
         
-        log.info("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        log.info("");
+        log.info("");
+        log.info("");
+        log.info("");
+        log.info("");
+        log.info("");
+        log.info("");
+        log.info("");
+        log.info("");
         
         return ResponseEntity.ok(null);
     }
