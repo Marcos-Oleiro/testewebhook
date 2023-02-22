@@ -21,18 +21,18 @@ public class MainController {
     @GetMapping("/consulta/{cnpj}")
     public ResponseEntity<?> consulta(@RequestHeader Map<String, String> headers, @PathVariable String cnpj) {
 
-
+        MainController.cleanLogs();
         log.info("CNPJ -> {}", cnpj);
         headers.forEach((key, value) -> {
             log.info(String.format("Header '%s' = %s", key, value));
         });
-
 
         double random = Math.round(Math.random() * 100);
 
         ReturnObj returnObj = new ReturnObj();
         returnObj.setProd(Boolean.valueOf(random % 2 == 0));
         log.info("Retorno: {}", returnObj);
+
         return ResponseEntity.ok(returnObj);
     }
 
@@ -43,7 +43,8 @@ public class MainController {
         // headers.forEach((key, value) -> {
         //     log.info(String.format("Header '%s' = %s", key, value));
         // });
-
+        
+        MainController.cleanLogs();
         log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
     }
@@ -57,12 +58,13 @@ public class MainController {
         //     log.info(String.format("Header '%s' = %s", key, value));
         // });
 
+        MainController.cleanLogs();
         log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
     }
     
-    @GetMapping("/clean")
-    public ResponseEntity<?> cleanLogs(){
+    
+    public static void cleanLogs(){
         
         log.info("");
         log.info("");
@@ -74,6 +76,5 @@ public class MainController {
         log.info("");
         log.info("");
         
-        return ResponseEntity.ok(null);
     }
 }
