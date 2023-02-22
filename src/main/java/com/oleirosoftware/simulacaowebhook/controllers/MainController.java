@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -17,12 +18,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MainController {
 
-    @GetMapping("/consulta")
-    public ResponseEntity<?> consulta(@RequestHeader Map<String, String> headers) {
+    @GetMapping("/consulta/{cnpj}")
+    public ResponseEntity<?> consulta(@RequestHeader Map<String, String> headers, @PathVariable String cnpj) {
 
+
+        log.info("CNPJ -> {}", cnpj);
         headers.forEach((key, value) -> {
             log.info(String.format("Header '%s' = %s", key, value));
         });
+
 
         double random = Math.round(Math.random() * 100);
 
