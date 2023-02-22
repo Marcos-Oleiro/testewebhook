@@ -36,9 +36,9 @@ public class MainController {
     public ResponseEntity<?> dev(@RequestBody Object obj, @RequestHeader Map<String, String> headers) {
         log.info("Ambiente DEV chamado");
 
-        headers.forEach((key, value) -> {
-            log.info(String.format("Header '%s' = %s", key, value));
-        });
+        // headers.forEach((key, value) -> {
+        //     log.info(String.format("Header '%s' = %s", key, value));
+        // });
 
         log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
@@ -49,9 +49,9 @@ public class MainController {
 
         log.info("Ambiente PRD chamado");
 
-        headers.forEach((key, value) -> {
-            log.info(String.format("Header '%s' = %s", key, value));
-        });
+        // headers.forEach((key, value) -> {
+        //     log.info(String.format("Header '%s' = %s", key, value));
+        // });
 
         log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
