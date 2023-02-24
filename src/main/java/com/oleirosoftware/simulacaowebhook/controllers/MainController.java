@@ -38,13 +38,15 @@ public class MainController {
 
     @PostMapping("/dev")
     public ResponseEntity<?> dev(@RequestBody Object obj, @RequestHeader Map<String, String> headers) {
-        log.info("Ambiente DEV chamado");
 
+
+        MainController.cleanLogs();
+        log.info("Ambiente DEV chamado");
+        
         headers.forEach((key, value) -> {
             log.info(String.format("Header '%s' = %s", key, value));
         });
         
-        MainController.cleanLogs();
         log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
     }
@@ -52,13 +54,13 @@ public class MainController {
     @PostMapping("/prd")
     public ResponseEntity<?> prd(@RequestBody Object obj, @RequestHeader Map<String, String> headers) {
 
+        MainController.cleanLogs();
         log.info("Ambiente PRD chamado");
-
+        
         headers.forEach((key, value) -> {
             log.info(String.format("Header '%s' = %s", key, value));
         });
 
-        MainController.cleanLogs();
         log.info("Objeto Recebido {}", obj);
         return ResponseEntity.ok(null);
     }
